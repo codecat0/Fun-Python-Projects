@@ -32,7 +32,7 @@ class MovieDataset(Dataset):
         self.max_mov_tit = np.max([self.movie_title[k] for k in self.movie_title.keys()])
         self.max_mov_id = np.max(list(map(int, self.movie_info.keys())))
         # 记录用户数据的最大ID
-        self.max_usr_id = 0
+        # self.max_usr_id = 0
         self.max_usr_age = 0
         self.max_usr_job = 0
         # 得到用户数据
@@ -175,7 +175,7 @@ class MovieDataset(Dataset):
                 'age': int(item[2]),
                 'job': int(item[3])
             }
-            self.max_usr_id = max(self.max_mov_id, int(usr_id))
+            # self.max_usr_id = max(self.max_mov_id, int(usr_id))
             self.max_usr_age = max(self.max_usr_age, int(item[2]))
             self.max_usr_job = max(self.max_usr_job, int(item[3]))
 
