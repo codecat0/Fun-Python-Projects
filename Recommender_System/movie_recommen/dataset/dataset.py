@@ -61,8 +61,8 @@ class MovieDataset(Dataset):
         else:
             dataset = self.valid_dataset
 
-        # usr_id = dataset[idx]['usr_info']['usr_id']
-        # usr_id = np.array(usr_id)
+        usr_id = dataset[idx]['usr_info']['usr_id']
+        usr_id = np.array(usr_id)
         gender = dataset[idx]['usr_info']['gender']
         gender = np.array(gender)
         age = dataset[idx]['usr_info']['age']
@@ -89,7 +89,7 @@ class MovieDataset(Dataset):
         score = int(dataset[idx]['scores'])
         score = np.array(score)
 
-        return [gender, age, job], [category, title, poster], score
+        return [usr_id, mov_id], [gender, age, job], [category, title, poster], score
 
     @staticmethod
     def get_dataset(usr_info, rating_info, movie_info):
@@ -210,16 +210,16 @@ def movie_dataset_collate(batch):
 
     score_list = []
 
-    for usr, mov, score in batch:
-        for gender, age, job in usr:
-            usr_gender_list.append(gender)
-            usr_age_list.append(age)
-            usr_job_list.append(job)
+    for _, usr, mov, score in batch:
+        gender, age, job = usr
+        usr_gender_list.append(gender)
+        usr_age_list.append(age)
+        usr_job_list.append(job)
 
-        for cat, tit, poster in mov:
-            mov_cat_list.append(cat)
-            mov_tit_list.append(tit)
-            mov_poster_list.append(poster)
+        cat, tit, poster = mov
+        mov_cat_list.append(cat)
+        mov_tit_list.append(tit)
+        mov_poster_list.append(poster)
 
         score_list.append(score)
 
