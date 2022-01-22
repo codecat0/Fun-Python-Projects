@@ -97,11 +97,11 @@ def train_one_epoch(model, optimizer, epoch, train_loader, val_loader, Epochs, c
 if __name__ == '__main__':
     # 是否使用GPU训练、batch_size大小、学习率，多线程读取数据、是否使用海报数据
     cuda = True
-    batch_size = 256
+    batch_size = 512
     lr = 0.001
     num_workers = min([os.cpu_count(), batch_size if batch_size > 1 else 0, 8])
     use_poster = False
-    Epochs = 10
+    Epochs = 100
     # 定义模型
     model = Model(use_poster=use_poster)
     if cuda:
